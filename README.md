@@ -100,14 +100,4 @@ Divisão: 2.0
 
 **XML-RPC:** mecanismo que utiliza XML para representar os dados trocados durante as chamadas remotas.
 
-## Observação
 
-Esta implementação utiliza `localhost`, permitindo a comunicação entre processos executados na mesma máquina. Para comunicação entre computadores diferentes, é necessário configurar o endereço de rede do servidor e permitir o tráfego na porta utilizada.
-
-## Autor
-
-CNR
-
-## Licença
-
-Projeto desenvolvido para fins educacionais.
