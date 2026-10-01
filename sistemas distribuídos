@@ -1,113 +1,28 @@
-# Atividade de Comunicação entre Processos utilizando RPC
+1. Problema da empresa
 
-## Sobre o projeto
+A empresa precisa disponibilizar um cálculo para que outro programa possa solicitá-lo. Para isso, foi utilizada a comunicação RPC (Remote Procedure Call), permitindo que um cliente solicite um cálculo a um servidor.
 
-Este projeto foi desenvolvido como atividade acadêmica com o objetivo de demonstrar a comunicação entre processos utilizando **RPC (Remote Procedure Call)** em Python.
+2. Arquivos do projeto
 
-A aplicação permite que um programa cliente solicite a execução de operações matemáticas disponibilizadas por um servidor, recebendo os resultados por meio de chamadas remotas de procedimento.
+servidor.py: recebe a chamada RPC, executa o cálculo e retorna o resultado.
 
-## Objetivos
+cliente.py: solicita o cálculo ao servidor e exibe a resposta.
 
-* Compreender o funcionamento da comunicação RPC.
-* Implementar um servidor que disponibiliza funções remotamente.
-* Desenvolver um cliente que realiza chamadas ao servidor.
-* Demonstrar a troca de solicitações e respostas entre processos.
+3. Resultado do teste
 
-## Tecnologias utilizadas
+O cliente enviou uma solicitação ao servidor RPC, que executou o cálculo e retornou o resultado ao cliente.
 
-| Tecnologia           | Descrição                     |
-| -------------------- | ----------------------------- |
-| Python 3             | Linguagem de programação      |
-| XML-RPC              | Protocolo de chamadas remotas |
-| `SimpleXMLRPCServer` | Implementação do servidor RPC |
-| `xmlrpc.client`      | Cliente para comunicação RPC  |
+4. Respostas da atividade
 
-## Estrutura do projeto
+1. Em qual programa foi executado o cálculo?
+No programa servidor.py.
 
-```text
-atividade-rpc-python/
-├── servidor.py
-├── cliente.py
-└── README.md
-```
+2. Qual programa iniciou a solicitação?
+O programa cliente.py.
 
-## Funcionalidades
+3. O que aconteceria com o cliente se o servidor estivesse desligado?
+O cliente não receberia a resposta e poderia apresentar um erro de conexão ou ficar aguardando até ocorrer um timeout.
 
-O servidor disponibiliza as seguintes operações:
+5. Conclusão
 
-* **Soma:** adiciona dois números.
-* **Subtração:** calcula a diferença entre dois números.
-* **Multiplicação:** multiplica dois números.
-* **Divisão:** divide dois números, tratando a divisão por zero.
-
-## Como executar
-
-### 1. Pré-requisitos
-
-* Python 3 instalado.
-* Terminal ou editor de código, como o Visual Studio Code.
-
-Não é necessária a instalação de bibliotecas externas.
-
-### 2. Iniciar o servidor
-
-Abra o terminal na pasta do projeto e execute:
-
-```bash
-python servidor.py
-```
-
-O servidor ficará aguardando as solicitações dos clientes na porta 8000.
-
-### 3. Executar o cliente
-
-Abra um segundo terminal na mesma pasta e execute:
-
-```bash
-python cliente.py
-```
-
-O cliente realizará as chamadas remotas e exibirá os resultados.
-
-## Exemplo de execução
-
-Considerando os valores 10 e 5, o resultado esperado é:
-
-```text
-=== Calculadora RPC ===
-Números utilizados: 10 e 5
-Soma: 15
-Subtração: 5
-Multiplicação: 50
-Divisão: 2.0
-```
-
-## Funcionamento da comunicação
-
-1. O servidor inicia e registra as funções matemáticas.
-2. O cliente estabelece uma conexão com o servidor.
-3. O cliente envia os valores e solicita a execução de uma função.
-4. O servidor executa o cálculo solicitado.
-5. O resultado é retornado ao cliente.
-
-## Conceitos aplicados
-
-**RPC (Remote Procedure Call):** mecanismo que permite a um programa solicitar a execução de uma função em outro processo, como se fosse uma chamada local.
-
-**Cliente:** programa responsável por enviar as solicitações.
-
-**Servidor:** programa responsável por receber as solicitações, executar as operações e retornar os resultados.
-
-**XML-RPC:** mecanismo que utiliza XML para representar os dados trocados durante as chamadas remotas.
-
-## Observação
-
-Esta implementação utiliza `localhost`, permitindo a comunicação entre processos executados na mesma máquina. Para comunicação entre computadores diferentes, é necessário configurar o endereço de rede do servidor e permitir o tráfego na porta utilizada.
-
-## Autor
-
-CNR
-
-## Licença
-
-Projeto desenvolvido para fins educacionais.
+O teste demonstrou que a comunicação RPC permite que um cliente solicite a execução de um cálculo a um servidor e receba o resultado.
