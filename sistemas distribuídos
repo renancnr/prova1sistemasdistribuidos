@@ -1,28 +1,67 @@
+Atividade Prática: Comunicação RPC em Python
 1. Problema da empresa
-
-A empresa precisa disponibilizar um cálculo para que outro programa possa solicitá-lo. Para isso, foi utilizada a comunicação RPC (Remote Procedure Call), permitindo que um cliente solicite um cálculo a um servidor.
-
+A empresa precisa disponibilizar um cálculo para que outro programa possa solicitá-lo. Para resolver esse problema, foi utilizada a comunicação RPC (Remote Procedure Call), que permite que um programa cliente solicite a execução de uma função em um servidor e receba o resultado.
 2. Arquivos do projeto
+O projeto é composto por dois programas:
+- servidor.py: recebe a chamada RPC, executa o cálculo e retorna o resultado.
+- cliente.py: solicita o cálculo ao servidor e exibe a resposta recebida.
+Arquivo: servidor.py
+from xmlrpc.server import SimpleXMLRPCServer
 
-servidor.py: recebe a chamada RPC, executa o cálculo e retorna o resultado.
 
-cliente.py: solicita o cálculo ao servidor e exibe a resposta.
+def calcular(a, b):
+    resultado = a + b
+    return resultado
+
+
+servidor = SimpleXMLRPCServer(
+    ("localhost", 8000),
+    allow_none=True
+)
+
+servidor.register_function(calcular, "calcular")
+
+print("Servidor RPC iniciado.")
+print("Aguardando solicitações...")
+
+servidor.serve_forever()
+
+Arquivo: cliente.py
+import xmlrpc.client
+
+servidor = xmlrpc.client.ServerProxy(
+    "http://localhost:8000/"
+)
+
+a = 10
+b = 5
+
+resultado = servidor.calcular(a, b)
+
+print("Solicitação enviada ao servidor RPC.")
+print(f"Cálculo solicitado: {a} + {b}")
+print(f"Resultado recebido: {resultado}")
 
 3. Resultado do teste
+Considerando a execução dos programas com os valores 10 e 5, o resultado esperado é:
+Terminal do servidor (servidor.py):
+Servidor RPC iniciado.
+Aguardando solicitações...
 
-O cliente enviou uma solicitação ao servidor RPC, que executou o cálculo e retornou o resultado ao cliente.
+Terminal do cliente (cliente.py):
+Solicitação enviada ao servidor RPC.
+Cálculo solicitado: 10 + 5
+Resultado recebido: 15
 
+O cliente envia os valores ao servidor, o servidor realiza a soma e retorna o resultado 15.
+Observação: essa é a saída esperada para os códigos apresentados. Para registrar o resultado como um teste realmente executado, rode os dois programas no seu computador.
 4. Respostas da atividade
-
-1. Em qual programa foi executado o cálculo?
-No programa servidor.py.
-
-2. Qual programa iniciou a solicitação?
-O programa cliente.py.
-
-3. O que aconteceria com o cliente se o servidor estivesse desligado?
-O cliente não receberia a resposta e poderia apresentar um erro de conexão ou ficar aguardando até ocorrer um timeout.
-
+4.1. Em qual programa foi executado o cálculo?
+No programa servidor.py, responsável por receber a solicitação RPC e executar a operação.
+4.2. Qual programa iniciou a solicitação?
+O programa cliente.py, responsável por enviar a chamada RPC ao servidor.
+4.3. O que aconteceria com o cliente se o servidor estivesse desligado?
+O cliente não conseguiria receber o resultado do cálculo e apresentaria um erro de conexão, pois o servidor não estaria disponível para atender à solicitação.
 5. Conclusão
-
-O teste demonstrou que a comunicação RPC permite que um cliente solicite a execução de um cálculo a um servidor e receba o resultado.
+A atividade demonstrou o funcionamento da comunicação RPC entre dois programas em Python. O cliente enviou uma solicitação ao servidor, que executou o cálculo e retornou o resultado.
+Dessa forma, foi possível compreender como a comunicação RPC permite disponibilizar funções de um programa para que outro programa possa utilizá-las remotamente.
